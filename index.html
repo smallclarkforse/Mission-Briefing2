@@ -5777,23 +5777,22 @@ const TEAM_DATA = {
     ]
   },
 
-   // ── BLADES OF KHAINE ─────────────────────────────────────────────────────
+    // ── BLADES OF KHAINE ─────────────────────────────────────────────────────
   bladeskhaine: {
     name: 'Blades of Khaine',
     composition: {
-      fixed: ['Autarch'],
+      fixed: [], // No fixed operatives
       slots: 9,
+      minSlots: 9, // Must take exactly 9 operatives
       pool: [
         { name: 'Dire Avenger Exarch',       max: 1 },
-        { name: 'Dire Avenger',              max: 3 },
+        { name: 'Dire Avenger',              max: 99 },
         { name: 'Howling Banshee Exarch',    max: 1 },
-        { name: 'Howling Banshee',           max: 3 },
+        { name: 'Howling Banshee',           max: 99 },
         { name: 'Striking Scorpion Exarch',  max: 1 },
-        { name: 'Striking Scorpion',         max: 3 },
-        { name: 'Fire Dragon Exarch',        max: 1 },
-        { name: 'Fire Dragon',               max: 2 }
+        { name: 'Striking Scorpion',         max: 99 }
       ],
-      notes: 'Must include at least 3 of one Aspect Warrior type. Max 1 Exarch per Aspect.'
+      notes: 'Must include operatives from at least two different Aspect Warrior types. You can only include each type of Exarch (DIRE AVENGER EXARCH, HOWLING BANSHEE EXARCH, STRIKING SCORPION EXARCH) once.'
     },
     faction: 'Aeldari Craftworlds',
     accent: '#7EC8C8',
@@ -5804,125 +5803,121 @@ const TEAM_DATA = {
     symbol: '⚔️',
     archetype: 'Seek & Destroy / Infiltration',
     factionAbilities: [
-      { name: 'Battle Focus', desc: 'After a friendly operative performs a Shoot action, it can move up to 3" (this is not an action and cannot be performed if it is within control range of an enemy operative).' },
-      { name: 'Ancient Doom', desc: 'Friendly operatives have the Balanced weapon rule when fighting or retaliating against CHAOS operatives. When an enemy CHAOS operative fights or retaliates against a friendly operative, it has the Balanced weapon rule.' }
+      { name: 'Battle Focus', desc: 'After a friendly operative performs a Shoot action, if it is not within control range of any enemy operatives, it can move up to 3". This is not an action and cannot be performed if it is within control range of an enemy operative.' },
+      { name: 'Ancient Doom', desc: 'When a friendly operative fights or retaliates against a CHAOS operative, its melee weapons have the Balanced weapon rule. When an enemy CHAOS operative fights or retaliates against a friendly operative, its melee weapons have the Balanced weapon rule.' }
     ],
     operatives: [
-      { name: 'Autarch', role: 'LEADER', type: 'Aeldari Autarch', maxWounds: 12, 
-        M: '7"', APL: 3, GA: 1, DF: 3, SV: '3+',
+      // --- DIRE AVENGERS ---
+      { 
+        name: 'Dire Avenger Exarch', role: 'LEADER', type: 'Dire Avenger', maxWounds: 11,
+        M: '7"', APL: 2, GA: 1, DF: 3, SV: '4+',
         weapons: [
-          { name: 'Shuriken pistol', rng: '8"', atk: 4, hit: '3+', dmg: '2/4', rules: ['Rending'] },
-          { name: 'Star glaive', rng: 'melee', atk: 5, hit: '2+', dmg: '4/6', rules: ['Lethal 5+'] },
-          { name: 'Fusion gun', rng: '6"', atk: 4, hit: '3+', dmg: '5/7', rules: ['Melta 2', 'Piercing 2'] }
+          { name: 'Avenger shuriken catapult', rng: '18"', atk: 5, hit: '3+', dmg: '3/4', rules: ['Rending'] },
+          { name: 'Power weapon', rng: 'melee', atk: 4, hit: '3+', dmg: '4/6', rules: ['Lethal 5+'] }
         ],
         abilities: [
-          { name: 'Path of Command', desc: 'Once per Turning Point, when a friendly operative within 6" fails a Nerve test, you can re-roll that test.' },
+          { name: 'Bladestorm', desc: 'When this operative shoots, you can re-roll any or all of your attack dice of one result.' },
           { name: 'Battle Focus', desc: 'See team ability.' },
           { name: 'Ancient Doom', desc: 'See team ability.' }
         ]
       },
-      { name: 'Dire Avenger Exarch', role: 'LEADER', type: 'Dire Avenger', maxWounds: 11, 
-        M: '7"', APL: 2, GA: 1, DF: 4, SV: '4+',
-        weapons: [
-          { name: 'Avenger shuriken catapult', rng: '18"', atk: 5, hit: '3+', dmg: '3/4', rules: ['Rending'] }
-        ],
-        abilities: [
-          { name: 'Bladestorm', desc: 'When this operative shoots, you can re-roll any or all attack dice of one result.' }
-        ]
-      },
-      { name: 'Dire Avenger', role: 'OPERATIVE', type: 'Dire Avenger', maxWounds: 9, 
-        M: '7"', APL: 2, GA: 1, DF: 4, SV: '4+',
+      { 
+        name: 'Dire Avenger', role: 'OPERATIVE', type: 'Dire Avenger', maxWounds: 10,
+        M: '7"', APL: 2, GA: 1, DF: 3, SV: '4+',
         weapons: [
           { name: 'Avenger shuriken catapult', rng: '18"', atk: 4, hit: '3+', dmg: '3/4', rules: ['Rending'] }
         ],
         abilities: [
-          { name: 'Battle Focus', desc: 'See team ability.' }
+          { name: 'Battle Focus', desc: 'See team ability.' },
+          { name: 'Ancient Doom', desc: 'See team ability.' }
         ]
       },
-      { name: 'Howling Banshee Exarch', role: 'LEADER', type: 'Howling Banshee', maxWounds: 11, 
+
+      // --- HOWLING BANSHEES ---
+      { 
+        name: 'Howling Banshee Exarch', role: 'LEADER', type: 'Howling Banshee', maxWounds: 11,
         M: '8"', APL: 2, GA: 1, DF: 4, SV: '4+',
         weapons: [
-          { name: 'Executioner', rng: 'melee', atk: 5, hit: '2+', dmg: '4/6', rules: ['Lethal 5+', 'Brutal'] }
+          { name: 'Executioner', rng: 'melee', atk: 5, hit: '2+', dmg: '4/6', rules: ['Lethal 5+', 'Brutal'] },
+          { name: 'Shuriken pistol', rng: '8"', atk: 4, hit: '3+', dmg: '2/4', rules: ['Rending'] }
         ],
         abilities: [
           { name: 'Acrobatic', desc: 'When this operative performs the Charge action, it can move over enemy operatives and terrain features as if they were not there (but cannot end its move on top of them).' },
-          { name: 'War Shout', desc: 'When this operative fights, the enemy operative cannot use any Firefight Ploys during that fight sequence.' }
+          { name: 'War Shout', desc: 'When this operative fights, the enemy operative cannot use any Firefight Ploys during that fight sequence.' },
+          { name: 'Battle Focus', desc: 'See team ability.' },
+          { name: 'Ancient Doom', desc: 'See team ability.' }
         ]
       },
-      { name: 'Howling Banshee', role: 'OPERATIVE', type: 'Howling Banshee', maxWounds: 9, 
+      { 
+        name: 'Howling Banshee', role: 'OPERATIVE', type: 'Howling Banshee', maxWounds: 10,
         M: '8"', APL: 2, GA: 1, DF: 4, SV: '4+',
         weapons: [
-          { name: 'Banshee sword', rng: 'melee', atk: 4, hit: '3+', dmg: '4/5', rules: ['Lethal 5+'] }
+          { name: 'Banshee sword', rng: 'melee', atk: 4, hit: '3+', dmg: '4/5', rules: ['Lethal 5+'] },
+          { name: 'Shuriken pistol', rng: '8"', atk: 4, hit: '3+', dmg: '2/4', rules: ['Rending'] }
         ],
         abilities: [
-          { name: 'Acrobatic', desc: 'When this operative performs the Charge action, it can move over enemy operatives and terrain features as if they were not there (but cannot end its move on top of them).' }
+          { name: 'Acrobatic', desc: 'When this operative performs the Charge action, it can move over enemy operatives and terrain features as if they were not there (but cannot end its move on top of them).' },
+          { name: 'Battle Focus', desc: 'See team ability.' },
+          { name: 'Ancient Doom', desc: 'See team ability.' }
         ]
       },
-      { name: 'Striking Scorpion Exarch', role: 'LEADER', type: 'Striking Scorpion', maxWounds: 11, 
+
+      // --- STRIKING SCORPIONS ---
+      { 
+        name: 'Striking Scorpion Exarch', role: 'LEADER', type: 'Striking Scorpion', maxWounds: 11,
         M: '7"', APL: 2, GA: 1, DF: 4, SV: '3+',
         weapons: [
-          { name: 'Scorpion claw', rng: 'melee', atk: 5, hit: '3+', dmg: '5/7', rules: ['Brutal', 'Rending'] }
+          { name: 'Scorpion claw', rng: 'melee', atk: 5, hit: '3+', dmg: '5/7', rules: ['Brutal', 'Rending'] },
+          { name: 'Shuriken pistol', rng: '8"', atk: 4, hit: '3+', dmg: '2/4', rules: ['Rending'] }
         ],
         abilities: [
           { name: 'Stalker', desc: 'This operative can perform the Charge action while on a Conceal order. If it does, it does not change its order to Engage.' },
-          { name: 'Shadowstrike', desc: 'When this operative fights during an activation in which it performed the Charge action, it can strike first (the defender does not strike simultaneously).' }
+          { name: 'Shadowstrike', desc: 'When this operative fights during an activation in which it performed the Charge action, it strikes first (the defender does not strike simultaneously).' },
+          { name: 'Battle Focus', desc: 'See team ability.' },
+          { name: 'Ancient Doom', desc: 'See team ability.' }
         ]
       },
-      { name: 'Striking Scorpion', role: 'OPERATIVE', type: 'Striking Scorpion', maxWounds: 9, 
+      { 
+        name: 'Striking Scorpion', role: 'OPERATIVE', type: 'Striking Scorpion', maxWounds: 10,
         M: '7"', APL: 2, GA: 1, DF: 4, SV: '3+',
         weapons: [
           { name: 'Scorpion chainsword', rng: 'melee', atk: 4, hit: '3+', dmg: '4/5', rules: ['Rending'] },
           { name: 'Shuriken pistol', rng: '8"', atk: 4, hit: '3+', dmg: '2/4', rules: ['Rending'] }
         ],
         abilities: [
-          { name: 'Stalker', desc: 'This operative can perform the Charge action while on a Conceal order. If it does, it does not change its order to Engage.' }
+          { name: 'Stalker', desc: 'This operative can perform the Charge action while on a Conceal order. If it does, it does not change its order to Engage.' },
+          { name: 'Battle Focus', desc: 'See team ability.' },
+          { name: 'Ancient Doom', desc: 'See team ability.' }
         ]
-      },
-      { name: 'Fire Dragon Exarch', role: 'LEADER', type: 'Fire Dragon', maxWounds: 11, 
-        M: '7"', APL: 2, GA: 1, DF: 4, SV: '4+',
-        weapons: [
-          { name: 'Firepike', rng: '9"', atk: 4, hit: '3+', dmg: '6/8', rules: ['Melta 2', 'Piercing 2'] }
-        ],
-        abilities: [
-          { name: 'Crack Shot', desc: 'When this operative shoots, you can re-roll one failed hit roll.' }
-        ]
-      },
-      { name: 'Fire Dragon', role: 'OPERATIVE', type: 'Fire Dragon', maxWounds: 9, 
-        M: '7"', APL: 2, GA: 1, DF: 4, SV: '4+',
-        weapons: [
-          { name: 'Fusion gun', rng: '6"', atk: 4, hit: '3+', dmg: '5/7', rules: ['Melta 2', 'Piercing 2'] }
-        ],
-        abilities: []
       }
     ],
     ploys: {
       strategy: [
         { name: 'Khaine Awakens', cp: 1, desc: 'Use at the start of the Turning Point. Until the end of the Turning Point, friendly operatives have the Lethal 5+ weapon rule when fighting.' },
         { name: 'Flickering Form', cp: 1, desc: 'Use when an operative is shooting a friendly operative. Until the end of that shooting attack, that friendly operative can re-roll one defence die.' },
-        { name: 'Ghostwalk', cp: 1, desc: 'Use during a friendly operative's activation. Until the end of that activation, that operative can move through terrain features (but not enemy operatives) as if they were not there.' },
-        { name: 'Spiritsong', cp: 1, desc: 'Use at the start of a friendly Exarch operative's activation. That operative gains +1 APL for that activation.' }
+        { name: 'Ghostwalk', cp: 1, desc: 'Use during a friendly operative\'s activation. Until the end of that activation, that operative can move through terrain features (but not enemy operatives) as if they were not there.' },
+        { name: 'Spiritsong', cp: 1, desc: 'Use at the start of a friendly EXARCH operative\'s activation. That operative gains +1 APL for that activation.' }
       ],
       firefight: [
         { name: 'Deadly Riposte', cp: 1, desc: 'Use when a friendly HOWLING BANSHEE or STRIKING SCORPION operative fights. After that fight is resolved, if the enemy operative is still within control range, this friendly operative can immediately strike it again with one successful hit (inflict damage as normal).' },
         { name: 'Disruptive Song', cp: 1, desc: 'Use when an enemy operative is activated within 6" of a friendly HOWLING BANSHEE operative. That enemy operative cannot use Firefight Ploys during its activation.' },
-        { name: 'Swift Strike', cp: 1, desc: 'Use when a friendly STRIKING SCORPION operative fights during an activation in which it performed the Charge action. It can strike first (the defender does not strike simultaneously).' },
+        { name: 'Swift Strike', cp: 1, desc: 'Use when a friendly STRIKING SCORPION operative fights during an activation in which it performed the Charge action. It strikes first (the defender does not strike simultaneously).' },
         { name: 'Focused Fire', cp: 1, desc: 'Use when a friendly DIRE AVENGER operative shoots. Until the end of that shooting attack, its ranged weapons have the Ceaseless weapon rule.' }
       ]
     },
     factionEquip: [
       { name: 'Plasma Grenades', desc: 'Once per battle (1AP): Select a point within 8". Each operative (friend or foe) within 2" of that point suffers D3 mortal wounds on a 4+. Cannot be used within control range of an enemy.' },
       { name: 'Shuriken Pistol', desc: 'This operative gains the following ranged weapon: Shuriken pistol — Rng 8", Atk 4, Hit 3+, Dmg 2/4, Rending.' },
-      { name: 'Forceshield', desc: 'When an operative is shooting this operative, you can retain one additional defence die as a normal success (or one as a critical success instead).' },
+      { name: 'Forceshield', desc: 'When an operative is shooting this operative, you can retain one additional defence die as a normal success (or one as a critical success instead). This is not cumulative with other cover save improvements.' },
       { name: 'Ghost Helm', desc: 'Once per Turning Point, when this operative would become Shaken, it does not.' }
     ],
     tacOps: [
-      { id: 'bk-aspect', archetype: 'Seek & Destroy', name: 'Aspect of Death', reveal: 'Any Turning Point.', scoring: 'Score 1VP at the end of each Turning Point (after the first) if at least one enemy operative was incapacitated in melee. Score 2VP instead if two or more were incapacitated in melee.' },
-      { id: 'bk-shadow', archetype: 'Infiltration', name: 'Shadow Walk', reveal: 'Any Turning Point.', scoring: 'Score 1VP at the end of each Turning Point (after the first) if at least three friendly operatives have a Conceal order. Score 2VP instead if all surviving friendly operatives have a Conceal order.' },
-      { id: 'bk-raze', archetype: 'Seek & Destroy', name: 'Shrine Raze', reveal: 'Any Turning Point.', scoring: 'Score 1VP at the end of the battle for each objective marker that was in your opponent\'s territory and not controlled by any enemy operative at the end of the battle.' },
-      { id: 'bk-swift', archetype: 'Recon', name: 'Swift Advance', reveal: 'Any Turning Point.', scoring: 'Score 1VP at the end of each Turning Point (after the first) if at least one friendly operative ended its activation wholly within enemy territory. Score 2VP instead if two or more did so.' }
+      { id: 'bk-aspect', archetype: 'Seek & Destroy', name: 'Aspect of Death', reveal: 'Any Turning Point.', scoring: 'Score 1VP at the end of each Turning Point (after the first) if at least one enemy operative was incapacitated in melee. Score 2VP instead if two or more were incapacitated in melee. Max 2VP per Turning Point.' },
+      { id: 'bk-shadow', archetype: 'Infiltration', name: 'Shadow Walk', reveal: 'Any Turning Point.', scoring: 'Score 1VP at the end of each Turning Point (after the first) if at least three friendly operatives have a Conceal order. Score 2VP instead if all surviving friendly operatives have a Conceal order. Max 2VP per Turning Point.' },
+      { id: 'bk-raze', archetype: 'Seek & Destroy', name: 'Shrine Raze', reveal: 'Any Turning Point.', scoring: 'Score 1VP at the end of the battle for each objective marker that was in your opponent\'s territory and not controlled by any enemy operative at the end of the battle. Max 3VP.' },
+      { id: 'bk-swift', archetype: 'Recon', name: 'Swift Advance', reveal: 'Any Turning Point.', scoring: 'Score 1VP at the end of each Turning Point (after the first) if at least one friendly operative ended its activation wholly within enemy territory. Score 2VP instead if two or more did so. Max 2VP per Turning Point.' }
     ]
   },
-
    // ── BROOD BROTHERS ────────────────────────────────────────────────────────
   broodbrothers: {
     name: 'Brood Brothers',
